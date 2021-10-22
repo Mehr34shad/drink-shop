@@ -1,0 +1,15 @@
+body {
+  background-color: #414141;
+  /* background: #002e53 url('./index.png') no-repeat fixed center; */
+}
+/* darkslategrey */
+/* #414141 */
+/* fixed center */
+
+.txt1,
+.txt3 {
+  font-size: 5em;
+}
+.txt2 {
+  font-size: 15em;
+}
