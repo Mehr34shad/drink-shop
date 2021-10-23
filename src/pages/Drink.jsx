@@ -1,20 +1,22 @@
-import React, { useState, useEffect, useContext, Fragment } from "react";
-import { Card, Button, Modal } from "react-bootstrap";
-import axios from "axios";
-import contextApi from "../context/contextApi.js";
-import { FaRegStar, FaStar, FaShoppingCart, FaEye } from "react-icons/fa";
-import Header from "../components/Header.jsx";
+import React, { useState, useEffect, useContext, Fragment } from 'react';
+import { Card, Button} from 'react-bootstrap';
+import axios from 'axios';
+import contextApi from '../context/contextApi.js';
+import { FaRegStar, FaStar, FaShoppingCart} from 'react-icons/fa';
+import Header from '../components/Header.jsx';
+import ModalBeer from '../components/Modal-2.jsx';
 
 const Drink = () => {
   const context = useContext(contextApi);
 
-  const [beers, setBeers] = useState([]);
-  const [modalShowName, setModalShowName] = useState([]);
-  const [modalShowTag, setModalShowTag] = useState([]);
-  const [show, setShow] = useState(false);
+  // const [beers, setBeers] = useState([]);
+  // const [modalShowName, setModalShowName] = useState([]);
+  // const [modalShowTag, setModalShowTag] = useState([]);
+  // const [modalShowImg, setModalShowImg] = useState([]);
+  // const [show, setShow] = useState(false);
   useEffect(() => {
     axios
-      .get("https://api.punkapi.com/v2/beers")
+      .get('https://api.punkapi.com/v2/beers')
       .then((res) => {
         setBeers(res.data);
       })
@@ -44,10 +46,10 @@ const Drink = () => {
                 key={beer.id}
                 className=" text-white text-center rounded "
                 style={{
-                  width: "22rem",
-                  height: "25rem",
-                  cursor: "pointer",
-                  backgroundColor: "#313131",
+                  width: '22rem',
+                  height: '25rem',
+                  cursor: 'pointer',
+                  backgroundColor: '#313131',
                 }}
               >
                 <Card.Title className="mt-3">{beer.name}</Card.Title>
@@ -55,7 +57,7 @@ const Drink = () => {
                   className="mx-auto d-block mt-3"
                   variant="top"
                   src={beer.image_url}
-                  style={{ width: "15%", justifyContent: "center" }}
+                  style={{ width: '15%', justifyContent: 'center' }}
                 />
                 <Card.Body>
                   <Card.Text>{beer.tagline}</Card.Text>
@@ -67,7 +69,7 @@ const Drink = () => {
                         beer.name,
                         beer.image_url,
                         beer.tagline,
-                        beer.srm
+                        beer.srm,
                       )
                     }
                     variant="dark"
@@ -75,32 +77,8 @@ const Drink = () => {
                     <FaShoppingCart color="#f6d04d" fontSize="20px" />
                   </Button>
 
-                  <Button
-                    className="mx-3"
-                    variant="dark"
-                    onClick={() => {
-                      setShow(true);
-                      setModalShowName(beer.name);
-                      setModalShowTag(beer.tagline);
-                    }}
-                  >
-                    <FaEye color="#f6d04d" fontSize="20px" />
-                  </Button>
-                  <Modal
-                    show={show}
-                    onHide={() => setShow(false)}
-                    dialogClassName="modal-90w"
-                    aria-labelledby="example-custom-modal-styling-title"
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title id="example-custom-modal-styling-title">
-                        {modalShowName}
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <p>{modalShowTag}</p>
-                    </Modal.Body>
-                  </Modal>
+                  {/* Modal */}
+                  <ModalBeer />
 
                   <Button
                     onClick={() =>
@@ -110,7 +88,7 @@ const Drink = () => {
                         beer.image_url,
                         beer.tagline,
                         beer.srm,
-                        beer.first_brewed
+                        beer.first_brewed,
                       )
                     }
                     variant="dark"
