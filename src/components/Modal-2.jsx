@@ -1,27 +1,30 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Modal, Image } from 'react-bootstrap';
 import { FaEye } from 'react-icons/fa';
+import contextApi from '../context/contextApi.js';
 
 function ModalBeer() {
-  const [beers, setBeers] = useState([]);
+  const context = useContext(contextApi);
   const [modalShowName, setModalShowName] = useState([]);
   const [modalShowTag, setModalShowTag] = useState([]);
   const [modalShowImg, setModalShowImg] = useState([]);
   const [show, setShow] = useState(false);
   return (
     <>
-      <Button
-        className="mx-3"
-        variant="dark"
-        onClick={() => {
-          setShow(true);
-        //   setModalShowName(beer.name);
-        //   setModalShowTag(beer.tagline);
-        //   setModalShowImg(beer.image_url);
-        }}
-      >
-        <FaEye color="#f6d04d" fontSize="20px" />
-      </Button>
+      {context.beers.map((beer) => (
+        <Button
+          className="mx-3"
+          variant="dark"
+          onClick={() => {
+            setShow(true);
+            setModalShowName(beer.name);
+            setModalShowTag(beer.tagline);
+            setModalShowImg(beer.image_url);
+          }}
+        >
+          <FaEye color="#f6d04d" fontSize="20px" />
+        </Button>
+      ))}
       <Modal
         show={show}
         onHide={() => setShow(false)}
@@ -31,9 +34,15 @@ function ModalBeer() {
         <Modal.Header closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
             {modalShowName}
+            {/* {context.beers.id} */}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <h5>Name : {context.beers.name}</h5>
+          {/* <p>TagLine : {props.tagline}</p>
+          <p>Description : {props.tagline}</p>
+          <p>Price : {props.price}$</p>
+          <p>Abv : {props.abv}</p> */}
           <Image
             className="mx-auto d-block "
             src={modalShowImg}

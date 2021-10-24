@@ -1,29 +1,16 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react';
-import { Card, Button} from 'react-bootstrap';
-import axios from 'axios';
+import React, {  useContext, Fragment } from 'react';
+import { Card, Button } from 'react-bootstrap';
 import contextApi from '../context/contextApi.js';
-import { FaRegStar, FaStar, FaShoppingCart} from 'react-icons/fa';
+import { FaRegStar, FaStar, FaShoppingCart } from 'react-icons/fa';
 import Header from '../components/Header.jsx';
-import ModalBeer from '../components/Modal-2.jsx';
+import ModalBeer from './../components/Modal-2';
 
 const Drink = () => {
   const context = useContext(contextApi);
 
-  // const [beers, setBeers] = useState([]);
   // const [modalShowName, setModalShowName] = useState([]);
   // const [modalShowTag, setModalShowTag] = useState([]);
-  // const [modalShowImg, setModalShowImg] = useState([]);
   // const [show, setShow] = useState(false);
-  useEffect(() => {
-    axios
-      .get('https://api.punkapi.com/v2/beers')
-      .then((res) => {
-        setBeers(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   function check(ids) {
     const favoriteIndex = context.favorite.findIndex((p) => p.id === ids);
@@ -39,7 +26,7 @@ const Drink = () => {
 
       <div className="container mt-5">
         <div className="row">
-          {beers.map((beer) => (
+          {context.beers.map((beer) => (
             <div key={beer.id} className="col-md-4 mt-5">
               <Card
                 border="dark"
@@ -77,7 +64,33 @@ const Drink = () => {
                     <FaShoppingCart color="#f6d04d" fontSize="20px" />
                   </Button>
 
-                  {/* Modal */}
+                  {/* <Button
+                    className="mx-3"
+                    variant="dark"
+                    onClick={() => {
+                      setShow(true);
+                      setModalShowName(beer.name);
+                      setModalShowTag(beer.tagline);
+                    }}
+                  >
+                    <FaEye color="#f6d04d" fontSize="20px" />
+                  </Button> */}
+                  {/* <Modal
+                    show={show}
+                    onHide={() => setShow(false)}
+                    dialogClassName="modal-90w"
+                    aria-labelledby="example-custom-modal-styling-title"
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title id="example-custom-modal-styling-title">
+                        {modalShowName}
+                      </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      <p>{modalShowTag}</p>
+                    </Modal.Body>
+                  </Modal> */}
+
                   <ModalBeer />
 
                   <Button
