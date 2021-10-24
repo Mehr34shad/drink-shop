@@ -3,7 +3,8 @@ import { createContext } from 'react';
 const contexts = createContext({
     cards: [],
     favorite: [],
-    beers: [],
+    // beers: [],
+    handleBeerLists: () => { },
     handleNewCard: () => { },
     handleFavorite: () => { },
     handleDeleteCard: () => { },

@@ -9,7 +9,7 @@ import ModalBeer from '../components/Modal-2.jsx';
 const Drink = () => {
   const context = useContext(contextApi);
 
-  const [beers, setBeers] = useState([]);
+  // const [beers, setBeers] = useState([]);
   // const [modalShowName, setModalShowName] = useState([]);
   // const [modalShowTag, setModalShowTag] = useState([]);
   // const [modalShowImg, setModalShowImg] = useState([]);
