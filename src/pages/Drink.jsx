@@ -5,7 +5,7 @@ import { FaRegStar, FaStar, FaShoppingCart, FaEye } from 'react-icons/fa';
 import Header from '../components/Header.jsx';
 // import ModalBeer from './../components/Modal-2';
 
-const Drink = () => {
+const Drink = ({ id, image_url, name, price }) => {
   const context = useContext(contextApi);
   const { beers } = context;
 
