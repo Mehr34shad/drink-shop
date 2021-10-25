@@ -1,16 +1,18 @@
 import React, { Fragment, useContext } from 'react';
 
-import { Dropdown, Badge, Button } from 'react-bootstrap';
+import { Dropdown, Badge, Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart, FaStar } from 'react-icons/fa'
+import { FaShoppingCart, FaStar } from 'react-icons/fa';
 import contextApi from '../context/contextApi';
 
 const Header = () => {
   const context = useContext(contextApi);
   return (
     <Fragment>
-      <nav style={{ height: 80 }}
-        className="navbar navbar-expand-lg navbar-dark bg-dark text-warning">
+      <nav
+        style={{ height: 80 }}
+        className="navbar navbar-expand-lg navbar-dark bg-dark text-warning"
+      >
         <div className="container">
           <Link className="navbar-brand text-warning" to="/">
             drink-shop
@@ -50,11 +52,10 @@ const Header = () => {
                 <Badge>{context.cards.length}</Badge>
               </Dropdown.Toggle>
               <Dropdown.Menu stylr={{ minWidth: '370' }}>
-                {(context.cards.length === 0) ?
+                {context.cards.length === 0 ? (
                   <span style={{ padding: 10 }}>Cart is Empty!</span>
-                  :
-                  <Link to="/buy"
-                  >
+                ) : (
+                  <Link to="/buy">
                     <Button
                       style={{ width: '85%', margin: '0px 10px' }}
                       variant="dark"
@@ -62,7 +63,7 @@ const Header = () => {
                       Go to cart
                     </Button>
                   </Link>
-                }
+                )}
               </Dropdown.Menu>
             </Dropdown>
 
@@ -72,11 +73,10 @@ const Header = () => {
                 <Badge>{context.favorite.length}</Badge>
               </Dropdown.Toggle>
               <Dropdown.Menu stylr={{ minWidth: 370 }}>
-                {(context.favorite.length === 0) ?
+                {context.favorite.length === 0 ? (
                   <span style={{ padding: 10 }}>Favorite is Empty!</span>
-                  :
-                  <Link to="/favorite"
-                  >
+                ) : (
+                  <Link to="/favorite">
                     <Button
                       style={{ width: '85%', margin: '0px 10px' }}
                       variant="dark"
@@ -84,7 +84,7 @@ const Header = () => {
                       Go to favorite
                     </Button>
                   </Link>
-                }
+                )}
               </Dropdown.Menu>
             </Dropdown>
           </div>

@@ -1,16 +1,18 @@
-import React, {  useContext, Fragment } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import React, { useContext, Fragment, useState } from 'react';
+import { Card, Button, Modal, Image } from 'react-bootstrap';
 import contextApi from '../context/contextApi.js';
-import { FaRegStar, FaStar, FaShoppingCart } from 'react-icons/fa';
+import { FaRegStar, FaStar, FaShoppingCart, FaEye } from 'react-icons/fa';
 import Header from '../components/Header.jsx';
-import ModalBeer from './../components/Modal-2';
+// import ModalBeer from './../components/Modal-2';
 
 const Drink = () => {
   const context = useContext(contextApi);
+  const { beers } = context;
 
-  // const [modalShowName, setModalShowName] = useState([]);
-  // const [modalShowTag, setModalShowTag] = useState([]);
-  // const [show, setShow] = useState(false);
+  const [modalShowName, setModalShowName] = useState([]);
+  const [modalShowTag, setModalShowTag] = useState([]);
+  const [modalShowImg, setModalShowImg] = useState([]);
+  const [show, setShow] = useState(false);
 
   function check(ids) {
     const favoriteIndex = context.favorite.findIndex((p) => p.id === ids);
@@ -26,7 +28,7 @@ const Drink = () => {
 
       <div className="container mt-5">
         <div className="row">
-          {context.beers.map((beer) => (
+          {beers.map((beer) => (
             <div key={beer.id} className="col-md-4 mt-5">
               <Card
                 border="dark"
@@ -64,18 +66,19 @@ const Drink = () => {
                     <FaShoppingCart color="#f6d04d" fontSize="20px" />
                   </Button>
 
-                  {/* <Button
+                  <Button
                     className="mx-3"
                     variant="dark"
                     onClick={() => {
                       setShow(true);
                       setModalShowName(beer.name);
                       setModalShowTag(beer.tagline);
+                      setModalShowImg(beers.image_url);
                     }}
                   >
                     <FaEye color="#f6d04d" fontSize="20px" />
-                  </Button> */}
-                  {/* <Modal
+                  </Button>
+                  <Modal
                     show={show}
                     onHide={() => setShow(false)}
                     dialogClassName="modal-90w"
@@ -88,10 +91,16 @@ const Drink = () => {
                     </Modal.Header>
                     <Modal.Body>
                       <p>{modalShowTag}</p>
+                      <Image
+                        className="mx-auto d-block "
+                        src={modalShowImg}
+                        alt="img"
+                        style={{ width: '30%' }}
+                      />
                     </Modal.Body>
-                  </Modal> */}
+                  </Modal>
 
-                  <ModalBeer />
+                  {/* <ModalBeer /> */}
 
                   <Button
                     onClick={() =>

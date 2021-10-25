@@ -5,26 +5,28 @@ import contextApi from '../context/contextApi.js';
 
 function ModalBeer() {
   const context = useContext(contextApi);
+  const { beers } = context;
   const [modalShowName, setModalShowName] = useState([]);
   const [modalShowTag, setModalShowTag] = useState([]);
   const [modalShowImg, setModalShowImg] = useState([]);
   const [show, setShow] = useState(false);
   return (
     <>
-      {context.beers.map((beer) => (
-        <Button
-          className="mx-3"
-          variant="dark"
-          onClick={() => {
-            setShow(true);
-            setModalShowName(beer.name);
-            setModalShowTag(beer.tagline);
-            setModalShowImg(beer.image_url);
-          }}
-        >
-          <FaEye color="#f6d04d" fontSize="20px" />
-        </Button>
-      ))}
+      {/* {beers.map((beer) => ( */}
+      <Button
+        key={beers.id}
+        className="mx-3"
+        variant="dark"
+        onClick={() => {
+          setShow(true);
+          setModalShowName(beers.name);
+          setModalShowTag(beers.tagline);
+          setModalShowImg(beers.image_url);
+        }}
+      >
+        <FaEye color="#f6d04d" fontSize="20px" />
+      </Button>
+      {/* ))} */}
       <Modal
         show={show}
         onHide={() => setShow(false)}
@@ -33,16 +35,15 @@ function ModalBeer() {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
-            {modalShowName}
-            {/* {context.beers.id} */}
+            {beers.name}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h5>Name : {context.beers.name}</h5>
-          {/* <p>TagLine : {props.tagline}</p>
-          <p>Description : {props.tagline}</p>
-          <p>Price : {props.price}$</p>
-          <p>Abv : {props.abv}</p> */}
+          <p>TagLine : {context.beers.tagline}</p>
+          <p>Description : {context.beers.tagline}</p>
+          <p>Price : {context.beers.price}$</p>
+          <p>Abv : {context.beers.abv}</p>
           <Image
             className="mx-auto d-block "
             src={modalShowImg}
