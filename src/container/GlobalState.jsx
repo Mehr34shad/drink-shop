@@ -80,11 +80,12 @@ const Global = (props) => {
   };
 
   const sortBeerAsc = () => {
-    setCards(orderBy(Cards, 'price', 'asc'));
+  setBeers(orderBy(beers, 'name', 'asc'));
+    // alert("sort")
   };
 
   const sortBeerDes = () => {
-    setCards(orderBy(Cards, 'price', 'desc'));
+    setBeers(orderBy(beers, 'name', 'desc'));
   };
 
   return (

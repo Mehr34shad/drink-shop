@@ -1,17 +1,14 @@
-import React, { useContext, Fragment, useState } from 'react';
-import { Card, Button, Modal, Image } from 'react-bootstrap';
-import contextApi from '../context/contextApi.js';
-import { FaRegStar, FaStar, FaShoppingCart, FaEye } from 'react-icons/fa';
-import Header from '../components/Header.jsx';
-// import ModalBeer from './../components/Modal-2';
+import React, { useState, useContext, Fragment } from "react";
+import { Card, Button } from "react-bootstrap";
+import contextApi from "../context/contextApi.js";
+import { FaRegStar, FaStar, FaShoppingCart, FaEye } from "react-icons/fa";
+import Header from "../components/Header.jsx";
+import ModalBeer from "./../components/Modal";
 
-const Drink = ({ id, image_url, name, price }) => {
+const Drink = () => {
   const context = useContext(contextApi);
-  const { beers } = context;
 
-  const [modalShowName, setModalShowName] = useState([]);
-  const [modalShowTag, setModalShowTag] = useState([]);
-  const [modalShowImg, setModalShowImg] = useState([]);
+  const [id, setId] = useState([]);
   const [show, setShow] = useState(false);
 
   function check(ids) {
@@ -28,17 +25,17 @@ const Drink = ({ id, image_url, name, price }) => {
 
       <div className="container mt-5">
         <div className="row">
-          {beers.map((beer) => (
+          {context.beers.map((beer) => (
             <div key={beer.id} className="col-md-4 mt-5">
               <Card
                 border="dark"
                 key={beer.id}
                 className=" text-white text-center rounded "
                 style={{
-                  width: '22rem',
-                  height: '25rem',
-                  cursor: 'pointer',
-                  backgroundColor: '#313131',
+                  width: "22rem",
+                  height: "25rem",
+                  cursor: "pointer",
+                  backgroundColor: "#313131",
                 }}
               >
                 <Card.Title className="mt-3">{beer.name}</Card.Title>
@@ -46,7 +43,7 @@ const Drink = ({ id, image_url, name, price }) => {
                   className="mx-auto d-block mt-3"
                   variant="top"
                   src={beer.image_url}
-                  style={{ width: '15%', justifyContent: 'center' }}
+                  style={{ width: "15%", justifyContent: "center" }}
                 />
                 <Card.Body>
                   <Card.Text>{beer.tagline}</Card.Text>
@@ -58,7 +55,7 @@ const Drink = ({ id, image_url, name, price }) => {
                         beer.name,
                         beer.image_url,
                         beer.tagline,
-                        beer.srm,
+                        beer.srm
                       )
                     }
                     variant="dark"
@@ -71,37 +68,20 @@ const Drink = ({ id, image_url, name, price }) => {
                     variant="dark"
                     onClick={() => {
                       setShow(true);
-                      setModalShowName(beer.name);
-                      setModalShowTag(beer.tagline);
-                      setModalShowImg(beers.image_url);
+                      setId(beer.id);
                     }}
                   >
                     <FaEye color="#f6d04d" fontSize="20px" />
                   </Button>
-                  <Modal
-                    show={show}
-                    onHide={() => setShow(false)}
-                    dialogClassName="modal-90w"
-                    aria-labelledby="example-custom-modal-styling-title"
-                  >
-                    <Modal.Header closeButton>
-                      <Modal.Title id="example-custom-modal-styling-title">
-                        {modalShowName}
-                      </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <p>{modalShowTag}</p>
-                      <Image
-                        className="mx-auto d-block "
-                        src={modalShowImg}
-                        alt="img"
-                        style={{ width: '30%' }}
-                      />
-                    </Modal.Body>
-                  </Modal>
-
-                  {/* <ModalBeer /> */}
-
+                  {show === true ? (
+                    <ModalBeer
+                      show={show}
+                      setShow={(e) => setShow(e)}
+                      id={id}
+                    />
+                  ) : (
+                    ""
+                  )}
                   <Button
                     onClick={() =>
                       context.handleFavorite(
@@ -110,7 +90,7 @@ const Drink = ({ id, image_url, name, price }) => {
                         beer.image_url,
                         beer.tagline,
                         beer.srm,
-                        beer.first_brewed,
+                        beer.first_brewed
                       )
                     }
                     variant="dark"
