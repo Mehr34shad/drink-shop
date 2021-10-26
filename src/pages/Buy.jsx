@@ -18,7 +18,6 @@ const Buy = ({ id, image_url, name, price }) => {
     console.log(data);
     if (data) {
      setlist(JSON.parse(data));
-      // old_data.push(data)
     }
   }, []);
 

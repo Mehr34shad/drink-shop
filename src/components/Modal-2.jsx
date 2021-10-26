@@ -39,7 +39,7 @@ function ModalBeer() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h5>Name : {context.beers.name}</h5>
+          <h5>Name : {modalShowName}</h5>
           <p>TagLine : {context.beers.tagline}</p>
           <p>Description : {context.beers.tagline}</p>
           <p>Price : {context.beers.price}$</p>

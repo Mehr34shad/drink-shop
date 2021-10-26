@@ -1,9 +1,10 @@
 import React, { Fragment, useContext } from 'react';
 
-import { Dropdown, Badge, Button} from 'react-bootstrap';
+import { Dropdown, Badge, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaStar } from 'react-icons/fa';
 import contextApi from '../context/contextApi';
+import Sort from './Sort';
 
 const Header = () => {
   const context = useContext(contextApi);
@@ -90,19 +91,8 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      <div className="container mt-5">
-        <select
-          className="form-select w-25 text-white-50"
-          style={{ backgroundColor: '#313131' }}
-          aria-label="Default select example"
-        >
-          <option selected>Sort By</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Name : A-Z</option>
-          <option value="4">Name : A-Z</option>
-        </select>
-      </div>
+      {/* Sorting */}
+      <Sort />
     </Fragment>
   );
 };

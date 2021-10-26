@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { ToastContainer } from "react-toastify";
-import Contexts from "../context/contextApi";
-import axios from "axios";
+import { orderBy } from 'lodash';
+
+import { ToastContainer } from 'react-toastify';
+import Contexts from '../context/contextApi';
+import axios from 'axios';
 import {
   errorMessage,
   infoMessage,
   successMessage,
   warningMessage,
-} from "../utils/message";
+} from '../utils/message';
 
 const Global = (props) => {
   const [Cards, setCards] = useState([]);
@@ -21,7 +23,7 @@ const Global = (props) => {
 
   const sendGetRequest = async () => {
     try {
-      const res = await axios.get("https://api.punkapi.com/v2/beers");
+      const res = await axios.get('https://api.punkapi.com/v2/beers');
       setBeers(res.data);
     } catch (err) {
       console.error(err);
@@ -41,7 +43,7 @@ const Global = (props) => {
     cards.push(card);
     setCards(cards);
 
-    successMessage("Item successfully added to cart");
+    successMessage('Item successfully added to cart');
   };
 
   const handleFavorite = (ids, names, imgs, tagline, price, brewed) => {
@@ -60,12 +62,12 @@ const Global = (props) => {
       favorites.push(favorite);
       setFavorite(favorites);
 
-      infoMessage("Item added to favorites");
+      infoMessage('Item added to favorites');
     } else {
       const favorites = [...Favorite];
       const filterfavorite = favorites.filter((p) => p.id !== ids);
       setFavorite(filterfavorite);
-      warningMessage("Item removed from favorites");
+      warningMessage('Item removed from favorites');
     }
   };
 
@@ -74,14 +76,25 @@ const Global = (props) => {
     const filterCard = cards.filter((p) => p.id !== id);
     setCards(filterCard);
 
-    errorMessage("Remove Item From Cart");
+    errorMessage('Remove Item From Cart');
   };
+
+  const sortBeerAsc = () => {
+    setCards(orderBy(Cards, 'price', 'asc'));
+  };
+
+  const sortBeerDes = () => {
+    setCards(orderBy(Cards, 'price', 'desc'));
+  };
+
   return (
     <Contexts.Provider
       value={{
         cards: Cards,
         favorite: Favorite,
         beers: beers,
+        sortBeerAsc: sortBeerAsc,
+        sortBeerDes: sortBeerDes,
         handleNewCard: handleNewCard,
         handleDeleteCard: handleDeleteCard,
         handleFavorite: handleFavorite,
