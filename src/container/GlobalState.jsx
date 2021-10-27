@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { orderBy } from 'lodash';
-
 import { ToastContainer } from 'react-toastify';
 import Contexts from '../context/contextApi';
 import axios from 'axios';
@@ -26,6 +25,7 @@ const Global = (props) => {
       const res = await axios.get('https://api.punkapi.com/v2/beers');
       setBeers(res.data);
     } catch (err) {
+      warningMessage('Check your internet connection');
       console.error(err);
     }
   };
@@ -80,7 +80,7 @@ const Global = (props) => {
   };
 
   const sortBeerNameAsc = () => {
-  setBeers(orderBy(beers, 'name', 'asc'));
+    setBeers(orderBy(beers, 'name', 'asc'));
   };
 
   const sortBeerNameDes = () => {
@@ -88,7 +88,7 @@ const Global = (props) => {
   };
 
   const sortBeerAbvAsc = () => {
-  setBeers(orderBy(beers, 'abv', 'asc'));
+    setBeers(orderBy(beers, 'abv', 'asc'));
   };
 
   const sortBeerAbvDes = () => {

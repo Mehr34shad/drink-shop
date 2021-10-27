@@ -13,17 +13,17 @@ const Sort = () => {
         aria-label="Default select example"
         defaultValue="0"
       >
-        <option value="0">Sort By</option>
-        <option value="1" onClick={sortBeerAbvAsc}>
-          Abv Asc
+        <option value="1">Sort By</option>
+        <option value="2" onClick={sortBeerAbvAsc}>
+          Abv : Low
         </option>
-        <option value="2" onClick={sortBeerAbvDes}>
-          Abv Des
+        <option value="3" onClick={sortBeerAbvDes}>
+          Abv : High
         </option>
-        <option value="3" onClick={sortBeerNameAsc}>
+        <option value="4" onClick={sortBeerNameAsc}>
           Name : A-Z
         </option>
-        <option value="4" onClick={sortBeerNameDes}>
+        <option value="5" onClick={sortBeerNameDes}>
           Name : Z-A
         </option>
       </select>

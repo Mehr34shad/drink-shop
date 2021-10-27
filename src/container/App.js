@@ -15,7 +15,6 @@ const App = () => {
                 <Route path="/" component={Drink} exact />
                 <Route path="/buy" component={Buys} exact />
                 <Route path="/favorite" component={Favorite} exact />
-                {/* <Route path="/notfound" component={NotFound} exact /> */}
                 <Route path="/not-found" exact component={NotFound} />
                 <Redirect to="/not-found" />
             </Switch>
