@@ -49,7 +49,7 @@ const Buy = ({ id, image_url, name, price }) => {
   return (
     <Fragment>
       <Container className="mt-5">
-        <ListGroup>
+        <ListGroup >
           <ListGroup.Item key={id} variant="success">
             <Row>
               <Col md={3}>

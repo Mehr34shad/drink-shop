@@ -79,13 +79,20 @@ const Global = (props) => {
     errorMessage('Remove Item From Cart');
   };
 
-  const sortBeerAsc = () => {
+  const sortBeerNameAsc = () => {
   setBeers(orderBy(beers, 'name', 'asc'));
-    // alert("sort")
   };
 
-  const sortBeerDes = () => {
+  const sortBeerNameDes = () => {
     setBeers(orderBy(beers, 'name', 'desc'));
+  };
+
+  const sortBeerAbvAsc = () => {
+  setBeers(orderBy(beers, 'abv', 'asc'));
+  };
+
+  const sortBeerAbvDes = () => {
+    setBeers(orderBy(beers, 'abv', 'desc'));
   };
 
   return (
@@ -94,8 +101,10 @@ const Global = (props) => {
         cards: Cards,
         favorite: Favorite,
         beers: beers,
-        sortBeerAsc: sortBeerAsc,
-        sortBeerDes: sortBeerDes,
+        sortBeerNameAsc: sortBeerNameAsc,
+        sortBeerNameDes: sortBeerNameDes,
+        sortBeerAbvAsc: sortBeerAbvAsc,
+        sortBeerAbvDes: sortBeerAbvDes,
         handleNewCard: handleNewCard,
         handleDeleteCard: handleDeleteCard,
         handleFavorite: handleFavorite,
