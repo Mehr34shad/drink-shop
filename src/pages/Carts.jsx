@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 
-import contextApi from './../context/contextApi';
-import Buy from './Buy';
+import contextApi from '../context/contextApi';
+import Cart from './Cart';
 import { Button, Col, ListGroup, Row, Container } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 
 
-const Buys = () => {
+const Carts = () => {
   const context = useContext(contextApi);
 
   return (
@@ -17,7 +17,7 @@ const Buys = () => {
         <title>Buy Card</title>
       </Helmet>
       {context.cards.map((card) => (
-        <Buy
+        <Cart
           id={card.id}
           image_url={card.image_url}
           name={card.name}
@@ -61,4 +61,4 @@ const Buys = () => {
   );
 };
 
-export default Buys;
+export default Carts;

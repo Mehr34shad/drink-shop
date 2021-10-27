@@ -18,7 +18,7 @@ function ModalBeer({ show, setShow, id }) {
           {modalIndex.name}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="text-center">
         <p>Name : {modalIndex.name}</p>
         <p>TagLine : {modalIndex.tagline}</p>
         <p>Description : {modalIndex.tagline}</p>

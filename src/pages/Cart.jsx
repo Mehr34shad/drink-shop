@@ -3,7 +3,7 @@ import { Col, Image, ListGroup, Row, Container, Button } from 'react-bootstrap';
 import { AiFillDelete } from 'react-icons/ai';
 import contextApi from '../context/contextApi.js';
 
-const Buy = ({ id, image_url, name, price }) => {
+const Cart = ({ id, image_url, name, price }) => {
   const context = useContext(contextApi);
 
   const [list, setlist] = useState({
@@ -89,4 +89,4 @@ const Buy = ({ id, image_url, name, price }) => {
   );
 };
 
-export default Buy;
+export default Cart;

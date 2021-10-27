@@ -2,10 +2,10 @@ import React, { useState, useContext, Fragment } from "react";
 import { Card, Button } from "react-bootstrap";
 import contextApi from "../context/contextApi.js";
 import { FaRegStar, FaStar, FaShoppingCart, FaEye } from "react-icons/fa";
-import Header from "../components/Header.jsx";
-import ModalBeer from "./../components/Modal";
+import Header from "./Header.jsx";
+import ModalBeer from "./Modal";
 
-const Drink = () => {
+const Cards = () => {
   const context = useContext(contextApi);
 
   const [id, setId] = useState([]);
@@ -111,4 +111,4 @@ const Drink = () => {
   );
 };
 
-export default Drink;
+export default Cards;
