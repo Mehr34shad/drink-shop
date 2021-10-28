@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 
 import contextApi from '../context/contextApi';
 import Cart from './Cart';
@@ -7,38 +7,51 @@ import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 
-
 const Carts = () => {
   const context = useContext(contextApi);
+  // const {}
+
+  // const [total, setTotal] = useState();
+
+  // useEffect(() => {
+  //   setTotal(
+  //   context.cards(() => acc + Number(price) * 1, 0)
+  //   );
+  // }, [context.cards]);
 
   return (
-    <div>
+    <>
       <Helmet>
         <title>Buy Card</title>
       </Helmet>
-      {context.cards.map((card) => (
-        <Cart
+        {context.cards.map((card) => (
+         <Cart
           id={card.id}
           image_url={card.image_url}
-          name={card.name}
-          tagline={card.tagline}
-          price={card.price}
-          abv={card.abv}
-          description={card.description}
-
-        />
-      ))}
-
+           name={card.name}
+           tagline={card.tagline}
+           price={card.price}
+           abv={card.abv}
+           srm={card.srm}
+           description={card.description}
+         />
+         ))}
       <Container className="my-5">
-        <ListGroup>
-          <ListGroup.Item style={{ backgroundColor: '#313131' }}>
-            <Row>
-              <Col md={6}>
-                <h4 className=" text-white mt-1">
+
+        <ListGroup key={context.cards.id} >
+          <ListGroup.Item  style={{ backgroundColor: '#313131' }}>
+            <Row >
+              <Col md={4}>
+                <h5 className=" text-white mt-2">
                   Total items = {context.cards.length}
-                </h4>
+                </h5>
               </Col>
-              <Col md={6}>
+              <Col md={4}>
+                <h5 className=" text-white mt-2 me-5">
+                  Total price = {context.cards.id}$
+                </h5>
+              </Col>
+              <Col md={4}>
                 <Link to="/">
                   <Button
                     type="button"
@@ -56,9 +69,10 @@ const Carts = () => {
             </Row>
           </ListGroup.Item>
         </ListGroup>
+
       </Container>
-    </div>
-  );
-};
+      </>
+  )
+}
 
 export default Carts;

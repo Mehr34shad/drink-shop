@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { orderBy } from 'lodash';
 import { ToastContainer } from 'react-toastify';
 import Contexts from '../context/contextApi';
-import axios from 'axios';
+// import axios from 'axios';
+import { getBeerList } from './../services/beerList';
 import {
   errorMessage,
   infoMessage,
@@ -16,19 +17,19 @@ const Global = (props) => {
   const [Favorite, setFavorite] = useState([]);
   const [beers, setBeers] = useState([]);
 
+  const sendGetRequest = async () => {
+    // try {
+      const res = await getBeerList();
+      setBeers(res.data);
+    // } catch (err) {
+    //   warningMessage('Check your internet connection');
+    //   console.error(err);
+    // }
+  };
+
   useEffect(() => {
     sendGetRequest();
   }, []);
-
-  const sendGetRequest = async () => {
-    try {
-      const res = await axios.get('https://api.punkapi.com/v2/beers');
-      setBeers(res.data);
-    } catch (err) {
-      warningMessage('Check your internet connection');
-      console.error(err);
-    }
-  };
 
   const handleNewCard = (ids, names, imgs, tagline, price) => {
     const cards = [...Cards];
