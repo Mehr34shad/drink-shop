@@ -4,6 +4,7 @@ const contexts = createContext({
     cards: [],
     favorite: [],
     beers: [],
+    total: 0,
     sortBeerNameAsc: () => { },
     sortBeerNameDes: () => { },
     sortBeerAbvAsc: () => { },

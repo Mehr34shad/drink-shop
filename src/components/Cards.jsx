@@ -50,7 +50,6 @@ const Cards = () => {
                   <Button
                     onClick={() =>
                       context.handleNewCard(
-                        // uuidv4(),
                         beer.id,
                         beer.name,
                         beer.image_url,

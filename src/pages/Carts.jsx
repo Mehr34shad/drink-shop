@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
 
 import contextApi from '../context/contextApi';
 import Cart from './Cart';
@@ -9,38 +9,29 @@ import { FaHome } from 'react-icons/fa';
 
 const Carts = () => {
   const context = useContext(contextApi);
-  // const {}
-
-  // const [total, setTotal] = useState();
-
-  // useEffect(() => {
-  //   setTotal(
-  //   context.cards(() => acc + Number(price) * 1, 0)
-  //   );
-  // }, [context.cards]);
 
   return (
     <>
       <Helmet>
         <title>Buy Card</title>
       </Helmet>
-        {context.cards.map((card) => (
-         <Cart
+      {context.cards.map((card) => (
+        <Cart
+          key={card.id}
           id={card.id}
           image_url={card.image_url}
-           name={card.name}
-           tagline={card.tagline}
-           price={card.price}
-           abv={card.abv}
-           srm={card.srm}
-           description={card.description}
-         />
-         ))}
+          name={card.name}
+          tagline={card.tagline}
+          price={card.price}
+          abv={card.abv}
+          srm={card.srm}
+          description={card.description}
+        />
+      ))}
       <Container className="my-5">
-
-        <ListGroup key={context.cards.id} >
-          <ListGroup.Item  style={{ backgroundColor: '#313131' }}>
-            <Row >
+        <ListGroup key={context.cards.id}>
+          <ListGroup.Item style={{ backgroundColor: '#313131' }}>
+            <Row>
               <Col md={4}>
                 <h5 className=" text-white mt-2">
                   Total items = {context.cards.length}
@@ -48,7 +39,7 @@ const Carts = () => {
               </Col>
               <Col md={4}>
                 <h5 className=" text-white mt-2 me-5">
-                  Total price = {context.cards.id}$
+                  Total price = {context.total}$
                 </h5>
               </Col>
               <Col md={4}>
@@ -69,10 +60,9 @@ const Carts = () => {
             </Row>
           </ListGroup.Item>
         </ListGroup>
-
       </Container>
-      </>
-  )
-}
+    </>
+  );
+};
 
 export default Carts;

@@ -15,7 +15,6 @@ const Cart = ({ id, image_url, name, price }) => {
 
   useEffect(() => {
     const data = window.localStorage.getItem('listBeers');
-    console.log(data);
     if (data) {
      setlist(JSON.parse(data));
     }

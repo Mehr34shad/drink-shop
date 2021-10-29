@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { orderBy } from 'lodash';
 import { ToastContainer } from 'react-toastify';
 import Contexts from '../context/contextApi';
-// import axios from 'axios';
 import { getBeerList } from './../services/beerList';
 import {
   errorMessage,
@@ -16,11 +15,12 @@ const Global = (props) => {
   const [Cards, setCards] = useState([]);
   const [Favorite, setFavorite] = useState([]);
   const [beers, setBeers] = useState([]);
+  const [total, setTotal] = useState(0);
 
   const sendGetRequest = async () => {
     // try {
-      const res = await getBeerList();
-      setBeers(res.data);
+    const res = await getBeerList();
+    setBeers(res.data);
     // } catch (err) {
     //   warningMessage('Check your internet connection');
     //   console.error(err);
@@ -43,7 +43,7 @@ const Global = (props) => {
     };
     cards.push(card);
     setCards(cards);
-
+    newTotal(price);
     successMessage('Item successfully added to cart');
   };
 
@@ -77,6 +77,8 @@ const Global = (props) => {
     const filterCard = cards.filter((p) => p.id !== id);
     setCards(filterCard);
 
+    const modalIndex = beers.find((p) => p.id === id);
+    newTotal(modalIndex.srm, false);
     errorMessage('Remove Item From Cart');
   };
 
@@ -96,12 +98,23 @@ const Global = (props) => {
     setBeers(orderBy(beers, 'abv', 'desc'));
   };
 
+  const newTotal = (price, action = true) => {
+    if (action === true) {
+      const result = total + price;
+      setTotal(result);
+    } else {
+      const result = total - price;
+      setTotal(result);
+    }
+  };
+
   return (
     <Contexts.Provider
       value={{
         cards: Cards,
         favorite: Favorite,
         beers: beers,
+        total: total,
         sortBeerNameAsc: sortBeerNameAsc,
         sortBeerNameDes: sortBeerNameDes,
         sortBeerAbvAsc: sortBeerAbvAsc,
