@@ -18,13 +18,13 @@ const Global = (props) => {
   const [total, setTotal] = useState(0);
 
   const sendGetRequest = async () => {
-    // try {
+    try {
     const res = await getBeerList();
     setBeers(res.data);
-    // } catch (err) {
-    //   warningMessage('Check your internet connection');
-    //   console.error(err);
-    // }
+    } catch (err) {
+      warningMessage('Check your internet connection');
+      console.error(err);
+    }
   };
 
   useEffect(() => {

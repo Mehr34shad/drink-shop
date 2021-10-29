@@ -7,9 +7,9 @@ const Sort = () => {
     context;
   return (
     <div className="container mt-5">
-      <select
+       <select
         className="form-select w-25 text-white-50"
-        style={{ backgroundColor: '#313131' }}
+        style={{ backgroundColor: '#313131',cursor:"pointer"}}
         aria-label="Default select example"
         defaultValue="0"
       >
