@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { orderBy } from 'lodash';
-import { ToastContainer } from 'react-toastify';
-import Contexts from '../context/contextApi';
-import { getBeerList } from './../services/beerList';
+import { orderBy } from "lodash";
+import { ToastContainer } from "react-toastify";
+import Contexts from "../context/contextApi";
+import { getBeerList } from "./../services/beerList";
 import {
   errorMessage,
   infoMessage,
   successMessage,
   warningMessage,
-} from '../utils/message';
+} from "../utils/message";
 
 const Global = (props) => {
   const [Cards, setCards] = useState([]);
@@ -19,16 +19,26 @@ const Global = (props) => {
 
   const sendGetRequest = async () => {
     try {
-    const res = await getBeerList();
-    setBeers(res.data);
+      const res = await getBeerList();
+      setBeers(res.data);
     } catch (err) {
-      warningMessage('Check your internet connection');
+      warningMessage("Check your internet connection");
       console.error(err);
     }
   };
 
   useEffect(() => {
     sendGetRequest();
+    const getItem = window.localStorage.getItem("beer");
+    const getTotal = window.localStorage.getItem("total");
+    const getFavorite = window.localStorage.getItem("favorite");
+    if (getItem) {
+      setCards(JSON.parse(getItem));
+      setTotal(getTotal);
+    }
+    if (getFavorite) {
+      setFavorite(JSON.parse(getFavorite));
+    }
   }, []);
 
   const handleNewCard = (ids, names, imgs, tagline, price) => {
@@ -44,7 +54,8 @@ const Global = (props) => {
     cards.push(card);
     setCards(cards);
     newTotal(price);
-    successMessage('Item successfully added to cart');
+    window.localStorage.setItem("beer", JSON.stringify(cards));
+    successMessage("Item successfully added to cart");
   };
 
   const handleFavorite = (ids, names, imgs, tagline, price, brewed) => {
@@ -62,13 +73,17 @@ const Global = (props) => {
       };
       favorites.push(favorite);
       setFavorite(favorites);
-
-      infoMessage('Item added to favorites');
+      window.localStorage.setItem("favorite", JSON.stringify(favorites));
+      infoMessage("Item added to favorites");
     } else {
       const favorites = [...Favorite];
       const filterfavorite = favorites.filter((p) => p.id !== ids);
       setFavorite(filterfavorite);
-      warningMessage('Item removed from favorites');
+      window.localStorage.setItem("favorite", JSON.stringify(filterfavorite));
+      warningMessage("Item removed from favorites");
+      if (window.localStorage.getItem("favorite") === "[]") {
+        window.localStorage.removeItem("favorite");
+      }
     }
   };
 
@@ -76,35 +91,43 @@ const Global = (props) => {
     const cards = [...Cards];
     const filterCard = cards.filter((p) => p.id !== id);
     setCards(filterCard);
+    window.localStorage.setItem("beer", JSON.stringify(filterCard));
 
     const modalIndex = beers.find((p) => p.id === id);
     newTotal(modalIndex.srm, false);
-    errorMessage('Remove Item From Cart');
+
+    if (window.localStorage.getItem("beer") === "[]") {
+      window.localStorage.removeItem("beer");
+      window.localStorage.removeItem("total");
+    }
+    errorMessage("Remove Item From Cart");
   };
 
   const sortBeerNameAsc = () => {
-    setBeers(orderBy(beers, 'name', 'asc'));
+    setBeers(orderBy(beers, "name", "asc"));
   };
 
   const sortBeerNameDes = () => {
-    setBeers(orderBy(beers, 'name', 'desc'));
+    setBeers(orderBy(beers, "name", "desc"));
   };
 
   const sortBeerAbvAsc = () => {
-    setBeers(orderBy(beers, 'abv', 'asc'));
+    setBeers(orderBy(beers, "abv", "asc"));
   };
 
   const sortBeerAbvDes = () => {
-    setBeers(orderBy(beers, 'abv', 'desc'));
+    setBeers(orderBy(beers, "abv", "desc"));
   };
 
   const newTotal = (price, action = true) => {
     if (action === true) {
       const result = total + price;
       setTotal(result);
+      window.localStorage.setItem("total", result);
     } else {
       const result = total - price;
       setTotal(result);
+      window.localStorage.setItem("total", result);
     }
   };
 
