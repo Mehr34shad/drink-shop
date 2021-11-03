@@ -6,47 +6,6 @@ import contextApi from "../context/contextApi.js";
 const Cart = ({ id, image_url, name, price }) => {
   const context = useContext(contextApi);
 
-  // const [list, setlist] = useState([
-  //   {
-  //     id: id,
-  //     image_url: image_url,
-  //     name: name,
-  //     price: price,
-  //   },
-  // ]);
-
-  // useEffect(() => {
-  //   const data = localStorage.getItem("listBeers");
-  //   if (data) {
-  //     setlist(JSON.parse(data));
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   localStorage.setItem("listBeers", JSON.stringify(list));
-  // });
-
-  //   var hours = 24; // Reset when storage is more than 24hours
-  // var now = new Date().getTime();
-  // var setupTime = localStorage.getItem('setupTime');
-  // if (setupTime == null) {
-  //     localStorage.setItem('setupTime', now)
-  // } else {
-  //     if(now-setupTime > hours*60*60*1000) {
-  //         localStorage.clear()
-  //         localStorage.setItem('setupTime', now);
-  //     }
-  // }
-
-  // useEffect(() => {
-  //   const Data = window.localStorage.getItem('listBeers');
-  //   console.log(Data);
-  //   setlist(JSON.parse(Data));
-  // }, []);
-  // useEffect(() => {
-  //   window.localStorage.setItem('listBeers', JSON.stringify(list));
-  // });
-
   return (
     <Fragment>
       <Container className="mt-5">

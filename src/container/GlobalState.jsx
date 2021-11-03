@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import { orderBy } from "lodash";
-import { ToastContainer } from "react-toastify";
-import Contexts from "../context/contextApi";
-import { getBeerList } from "./../services/beerList";
+import { orderBy } from 'lodash';
+import { ToastContainer } from 'react-toastify';
+import Contexts from '../context/contextApi';
+import { getBeerList } from './../services/beerList';
 import {
   errorMessage,
   infoMessage,
   successMessage,
   warningMessage,
-} from "../utils/message";
+} from '../utils/message';
 
 const Global = (props) => {
   const [Cards, setCards] = useState([]);
@@ -22,16 +22,16 @@ const Global = (props) => {
       const res = await getBeerList();
       setBeers(res.data);
     } catch (err) {
-      warningMessage("Check your internet connection");
+      warningMessage('Check your internet connection');
       console.error(err);
     }
   };
 
   useEffect(() => {
     sendGetRequest();
-    const getItem = window.localStorage.getItem("beer");
-    const getTotal = window.localStorage.getItem("total");
-    const getFavorite = window.localStorage.getItem("favorite");
+    const getItem = window.localStorage.getItem('beer');
+    const getTotal = window.localStorage.getItem('total');
+    const getFavorite = window.localStorage.getItem('favorite');
     if (getItem) {
       setCards(JSON.parse(getItem));
       setTotal(getTotal);
@@ -54,8 +54,8 @@ const Global = (props) => {
     cards.push(card);
     setCards(cards);
     newTotal(price);
-    window.localStorage.setItem("beer", JSON.stringify(cards));
-    successMessage("Item successfully added to cart");
+    window.localStorage.setItem('beer', JSON.stringify(cards));
+    successMessage('Item successfully added to cart');
   };
 
   const handleFavorite = (ids, names, imgs, tagline, price, brewed) => {
@@ -73,16 +73,23 @@ const Global = (props) => {
       };
       favorites.push(favorite);
       setFavorite(favorites);
-      window.localStorage.setItem("favorite", JSON.stringify(favorites));
-      infoMessage("Item added to favorites");
+      window.localStorage.setItem('favorite', JSON.stringify(favorites));
+      infoMessage('Item added to favorites');
     } else {
       const favorites = [...Favorite];
       const filterfavorite = favorites.filter((p) => p.id !== ids);
       setFavorite(filterfavorite);
-      window.localStorage.setItem("favorite", JSON.stringify(filterfavorite));
-      warningMessage("Item removed from favorites");
-      if (window.localStorage.getItem("favorite") === "[]") {
-        window.localStorage.removeItem("favorite");
+      window.localStorage.setItem('favorite', JSON.stringify(filterfavorite));
+      warningMessage('Item removed from favorites');
+
+      let hours = 30 * 24; // Reset when storage is more than 1 Month
+      let now = new Date().getTime();
+
+      if (
+        window.localStorage.getItem('favorite') === '[]' ||
+        now > hours * 60 * 60 * 1000
+      ) {
+        window.localStorage.removeItem('favorite');
       }
     }
   };
@@ -91,43 +98,50 @@ const Global = (props) => {
     const cards = [...Cards];
     const filterCard = cards.filter((p) => p.id !== id);
     setCards(filterCard);
-    window.localStorage.setItem("beer", JSON.stringify(filterCard));
+    window.localStorage.setItem('beer', JSON.stringify(filterCard));
 
     const modalIndex = beers.find((p) => p.id === id);
     newTotal(modalIndex.srm, false);
 
-    if (window.localStorage.getItem("beer") === "[]") {
-      window.localStorage.removeItem("beer");
-      window.localStorage.removeItem("total");
+    let hours = 7 * 24; // Reset when storage is more than 1 Week
+    let now = new Date().getTime();
+
+    if (
+      window.localStorage.getItem('beer') === '[]' ||
+      now > hours * 60 * 60 * 1000
+    ) {
+      localStorage.clear();
+      window.localStorage.removeItem('beer');
+      window.localStorage.removeItem('total');
     }
-    errorMessage("Remove Item From Cart");
+    errorMessage('Remove Item From Cart');
   };
 
   const sortBeerNameAsc = () => {
-    setBeers(orderBy(beers, "name", "asc"));
+    setBeers(orderBy(beers, 'name', 'asc'));
   };
 
   const sortBeerNameDes = () => {
-    setBeers(orderBy(beers, "name", "desc"));
+    setBeers(orderBy(beers, 'name', 'desc'));
   };
 
   const sortBeerAbvAsc = () => {
-    setBeers(orderBy(beers, "abv", "asc"));
+    setBeers(orderBy(beers, 'abv', 'asc'));
   };
 
   const sortBeerAbvDes = () => {
-    setBeers(orderBy(beers, "abv", "desc"));
+    setBeers(orderBy(beers, 'abv', 'desc'));
   };
 
   const newTotal = (price, action = true) => {
     if (action === true) {
       const result = total + price;
       setTotal(result);
-      window.localStorage.setItem("total", result);
+      window.localStorage.setItem('total', result);
     } else {
       const result = total - price;
       setTotal(result);
-      window.localStorage.setItem("total", result);
+      window.localStorage.setItem('total', result);
     }
   };
 
