@@ -16,6 +16,7 @@ const Global = (props) => {
   const [Favorite, setFavorite] = useState([]);
   const [beers, setBeers] = useState([]);
   const [total, setTotal] = useState(0);
+  // const [sort, setSort] = useState([]);
 
   const sendGetRequest = async () => {
     try {
@@ -117,21 +118,30 @@ const Global = (props) => {
     errorMessage('Remove Item From Cart');
   };
 
+
+
   const sortBeerNameAsc = () => {
     setBeers(orderBy(beers, 'name', 'asc'));
+    console.log('sort');
   };
-
   const sortBeerNameDes = () => {
     setBeers(orderBy(beers, 'name', 'desc'));
+    console.log('sort');
   };
 
   const sortBeerAbvAsc = () => {
     setBeers(orderBy(beers, 'abv', 'asc'));
+    console.log('sort');
   };
 
   const sortBeerAbvDes = () => {
     setBeers(orderBy(beers, 'abv', 'desc'));
+    console.log('sort');
   };
+
+  // const sorting = (event) => {
+  //   setSort(event.target.value);
+  // };
 
   const newTotal = (price, action = true) => {
     if (action === true) {

@@ -36,6 +36,7 @@ const Cards = () => {
                   height: "25rem",
                   cursor: "pointer",
                   backgroundColor: "#313131",
+                  transition: "all 1s linear"
                 }}
               >
                 <Card.Title className="mt-3">{beer.name}</Card.Title>

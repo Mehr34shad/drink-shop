@@ -5,6 +5,7 @@ const contexts = createContext({
     favorite: [],
     beers: [],
     total: 0,
+    sort:  () => { },
     sortBeerNameAsc: () => { },
     sortBeerNameDes: () => { },
     sortBeerAbvAsc: () => { },

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaStar } from 'react-icons/fa';
 import contextApi from '../context/contextApi';
 import Sort from './Sort';
+import Pair from './Pair';
 
 const Header = () => {
   const context = useContext(contextApi);
@@ -30,23 +31,10 @@ const Header = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarText">
-            <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link " aria-current="page" to="#dsff">
-                  Drinks paired with pizza
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="#sfgs">
-                  Drinks paired with steak
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="#dgdg">
-                  All drinks
-                </Link>
-              </li>
-            </ul>
+            {/* Pair */}
+
+            <Pair />
+
             <Dropdown alignRight>
               <Dropdown.Toggle variant="warning">
                 <FaShoppingCart color="white" fontSize="25px" />
