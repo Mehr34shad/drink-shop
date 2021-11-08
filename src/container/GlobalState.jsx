@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { orderBy } from 'lodash';
 import { ToastContainer } from 'react-toastify';
 import Contexts from '../context/contextApi';
-import { getBeerList } from './../services/beerList';
+import { getAllBeerList } from './../services/allBeerList';
+import { getBeerPairPizza } from './../services/beerPairPizza';
+import { getBeerPairSteak } from './../services/beerPairSteak';
 import {
   errorMessage,
   infoMessage,
@@ -14,14 +16,33 @@ import {
 const Global = (props) => {
   const [Cards, setCards] = useState([]);
   const [Favorite, setFavorite] = useState([]);
-  const [beers, setBeers] = useState([]);
+  const [AllBeers, setAllBeers] = useState([]);
+  // const [BeerPairPizza, setBeerPairPizza] = useState([]);
+  // const [BeerPairSteak, setBeerPairSteak] = useState([]);
   const [total, setTotal] = useState(0);
-  // const [sort, setSort] = useState([]);
 
-  const sendGetRequest = async () => {
+  const allbeers = async () => {
     try {
-      const res = await getBeerList();
-      setBeers(res.data);
+      const res = await getAllBeerList();
+      setAllBeers(res.data);
+    } catch (err) {
+      warningMessage('Check your internet connection');
+      console.error(err);
+    }
+  };
+  const beerpizza = async () => {
+    try {
+      const res = await getBeerPairPizza();
+      setAllBeers(res.data);
+    } catch (err) {
+      warningMessage('Check your internet connection');
+      console.error(err);
+    }
+  };
+  const beersteak = async () => {
+    try {
+      const res = await getBeerPairSteak();
+      setAllBeers(res.data);
     } catch (err) {
       warningMessage('Check your internet connection');
       console.error(err);
@@ -29,7 +50,8 @@ const Global = (props) => {
   };
 
   useEffect(() => {
-    sendGetRequest();
+    // allbeers();
+    // beerpizza():
     const getItem = window.localStorage.getItem('beer');
     const getTotal = window.localStorage.getItem('total');
     const getFavorite = window.localStorage.getItem('favorite');
@@ -101,7 +123,7 @@ const Global = (props) => {
     setCards(filterCard);
     window.localStorage.setItem('beer', JSON.stringify(filterCard));
 
-    const modalIndex = beers.find((p) => p.id === id);
+    const modalIndex = AllBeers.find((p) => p.id === id);
     newTotal(modalIndex.srm, false);
 
     let hours = 7 * 24; // Reset when storage is more than 1 Week
@@ -118,30 +140,24 @@ const Global = (props) => {
     errorMessage('Remove Item From Cart');
   };
 
-
-
   const sortBeerNameAsc = () => {
-    setBeers(orderBy(beers, 'name', 'asc'));
+    setAllBeers(orderBy(AllBeers, 'name', 'asc'));
     console.log('sort');
   };
   const sortBeerNameDes = () => {
-    setBeers(orderBy(beers, 'name', 'desc'));
+    setAllBeers(orderBy(AllBeers, 'name', 'desc'));
     console.log('sort');
   };
 
   const sortBeerAbvAsc = () => {
-    setBeers(orderBy(beers, 'abv', 'asc'));
+    setAllBeers(orderBy(AllBeers, 'abv', 'asc'));
     console.log('sort');
   };
 
   const sortBeerAbvDes = () => {
-    setBeers(orderBy(beers, 'abv', 'desc'));
+    setAllBeers(orderBy(AllBeers, 'abv', 'desc'));
     console.log('sort');
   };
-
-  // const sorting = (event) => {
-  //   setSort(event.target.value);
-  // };
 
   const newTotal = (price, action = true) => {
     if (action === true) {
@@ -160,7 +176,10 @@ const Global = (props) => {
       value={{
         cards: Cards,
         favorite: Favorite,
-        beers: beers,
+        allbeers: allbeers,
+        beerpizza:beerpizza,
+        beersteak:beersteak,
+        AllBeers: AllBeers,
         total: total,
         sortBeerNameAsc: sortBeerNameAsc,
         sortBeerNameDes: sortBeerNameDes,

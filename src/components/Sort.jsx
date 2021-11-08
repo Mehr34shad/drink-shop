@@ -67,17 +67,17 @@ const Sort = () => {
       <h3 className="text-white">Filtre :</h3>
 
       <div className="radio-container text-white m-5">
-        <input type="radio" id="low" name="sort" onClick={sortBeerAbvAsc} />
-        <label htmlFor="low">Abv : Low</label>
+        <label htmlFor="low" className="me-3">Abv : Low</label>
+        <input type="radio" id="low" name="sort" className="" onClick={sortBeerAbvAsc} />
 
-        <input type="radio" id="high" name="sort" onClick={sortBeerAbvDes} />
-        <label htmlFor="high">Abv : High</label>
+        <label htmlFor="high" className="me-3">Abv : High</label>
+        <input type="radio" id="high" name="sort" className="" onClick={sortBeerAbvDes} />
 
-        <input type="radio" id="a-z" name="sort" onClick={sortBeerNameAsc} />
-        <label htmlFor="a-z">Name : A-Z</label>
+        <label htmlFor="a-z" className="me-3">Name : A-Z</label>
+        <input type="radio" id="a-z" name="sort" className="" onClick={sortBeerNameAsc} />
 
-        <input type="radio" id="z-a" name="sort" onClick={sortBeerNameDes} />
-        <label htmlFor="z-a">Name : Z-A</label>
+        <label htmlFor="z-a" className="me-3">Name : Z-A</label>
+        <input type="radio" id="z-a" name="sort" className="" onClick={sortBeerNameDes} />
       </div>
       </div>
     </>

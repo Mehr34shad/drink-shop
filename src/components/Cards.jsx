@@ -25,7 +25,7 @@ const Cards = () => {
 
       <div className="container mt-5">
         <div className="row">
-          {context.beers.map((beer) => (
+          {context.AllBeers.map((beer) => (
             <div key={beer.id} className="col-md-4 mt-5">
               <Card
                 border="dark"
