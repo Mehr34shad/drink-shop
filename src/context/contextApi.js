@@ -8,6 +8,7 @@ const contexts = createContext({
     BeerPairSteak: [],
     total: 0,
     sort: () => { },
+    sortItems: () => { },
     sortBeerNameAsc: () => { },
     allbeer: () => { },
     beerpizza: () => { },
