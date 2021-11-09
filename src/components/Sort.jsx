@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import contextApi from '../context/contextApi.js';
+import contexts from '../context/contexts.js';
 
 const Sort = () => {
-  const context = useContext(contextApi);
+  const context = useContext(contexts);
   const {sortBeerAbvAsc,sortBeerAbvDes,sortBeerNameAsc ,sortBeerNameDes} = context;
   return (
     <>

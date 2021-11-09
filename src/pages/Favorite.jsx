@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import { Button, Card, ListGroup, Container, Col, Row } from 'react-bootstrap';
-import contextApi from './../context/contextApi';
+import contexts from '../context/contexts';
 import { Link } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 import { Helmet } from 'react-helmet';
 
 const Favorite = () => {
-    const context = useContext(contextApi);
+    const context = useContext(contexts);
     return (
         <div>
             <Helmet>

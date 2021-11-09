@@ -4,10 +4,10 @@ import Drink from "../components/Cards";
 import Carts from "../pages/Carts";
 import Favorite from "./../pages/Favorite";
 import NotFound from "./../pages/NotFound";
-import contextApi from "../context/contextApi.js";
+import contexts from "../context/contexts.js";
 
 const App = () => {
-  const context = useContext(contextApi);
+  const context = useContext(contexts);
   return (
     <Fragment>
       <Switch>

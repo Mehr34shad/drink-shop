@@ -3,12 +3,12 @@ import React, { Fragment, useContext } from 'react';
 import { Dropdown, Badge, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaShoppingCart, FaStar } from 'react-icons/fa';
-import contextApi from '../context/contextApi';
+import contexts from '../context/contexts';
 import Sort from './Sort';
 import Pair from './Pair';
 
 const Header = () => {
-  const context = useContext(contextApi);
+  const context = useContext(contexts);
   return (
     <Fragment>
       <nav

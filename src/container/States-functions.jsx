@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import { orderBy } from 'lodash';
 import { ToastContainer } from 'react-toastify';
-import Contexts from '../context/contextApi';
-import { getAllBeerList } from './../services/beerList';
-import { getBeerPairPizza } from './../services/beerPairPizza';
-import { getBeerPairSteak } from './../services/beerPairSteak';
+import Contexts from '../context/contexts';
+import { getAllBeerList } from '../services/beerList';
+import { getBeerPairPizza } from '../services/beerPairPizza';
+import { getBeerPairSteak } from '../services/beerPairSteak';
 import {
   errorMessage,
   infoMessage,

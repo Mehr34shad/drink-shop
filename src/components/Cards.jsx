@@ -1,12 +1,12 @@
 import React, { useState, useContext, Fragment } from "react";
 import { Card, Button } from "react-bootstrap";
-import contextApi from "../context/contextApi.js";
+import contexts from "../context/contexts.js";
 import { FaRegStar, FaStar, FaShoppingCart, FaEye } from "react-icons/fa";
 import Header from "./Header.jsx";
 import ModalBeer from "./Modal";
 
 const Cards = ({ type }) => {
-  const context = useContext(contextApi);
+  const context = useContext(contexts);
 
   const [id, setId] = useState([]);
   const [show, setShow] = useState(false);

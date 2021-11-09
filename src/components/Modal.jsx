@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Image } from "react-bootstrap";
 
 function ModalBeer({ show, setShow, id, com }) {
-  // const context = useContext(contextApi);
+ 
   const modalIndex = com.find((p) => p.id === id);
 
   return (

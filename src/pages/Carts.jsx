@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import contextApi from '../context/contextApi';
+import contexts from '../context/contexts';
 import Cart from './Cart';
 import { Button, Col, ListGroup, Row, Container } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { FaHome } from 'react-icons/fa';
 
 const Carts = () => {
-  const context = useContext(contextApi);
+  const context = useContext(contexts);
 
   return (
     <>

@@ -1,32 +1,32 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import contextApi from "../context/contextApi.js";
+import { NavLink } from "react-router-dom";
+import contexts from "../context/contexts.js";
 
 const Pair = () => {
-  const context = useContext(contextApi);
+  const context = useContext(contexts);
   const { allbeer, beerpizza, beersteak } = context;
   return (
     <>
       <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link
+          <NavLink
             className="nav-link"
             to="/pizza"
             aria-current="page"
             onClick={beerpizza}
           >
             Drinks paired with pizza
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/steak" onClick={beersteak}>
+          <NavLink className="nav-link" to="/steak" onClick={beersteak}>
             Drinks paired with steak
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/" onClick={allbeer}>
+          <NavLink className="nav-link" to="/" onClick={allbeer}>
             All drinks
-          </Link>
+          </NavLink>
         </li>
       </ul>
     </>

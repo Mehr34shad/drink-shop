@@ -1,10 +1,10 @@
 import React, { Fragment, useContext} from "react";
 import { Col, Image, ListGroup, Row, Container, Button } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
-import contextApi from "../context/contextApi.js";
+import contexts from "../context/contexts.js";
 
 const Cart = ({ id, image_url, name, price }) => {
-  const context = useContext(contextApi);
+  const context = useContext(contexts);
 
   return (
     <Fragment>
