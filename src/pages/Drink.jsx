@@ -1,11 +1,11 @@
 import React, { useState, useContext, Fragment } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Modal } from "react-bootstrap";
 import contextApi from "../context/contextApi.js";
 import { FaRegStar, FaStar, FaShoppingCart, FaEye } from "react-icons/fa";
-import Header from "./Header.jsx";
-import ModalBeer from "./Modal";
+import Header from "../components/Header.jsx";
+import ModalBeer from "./../components/Modal";
 
-const Cards = ({ type }) => {
+const Drink = () => {
   const context = useContext(contextApi);
 
   const [id, setId] = useState([]);
@@ -19,16 +19,13 @@ const Cards = ({ type }) => {
       return false;
     }
   }
-
-  console.log({ type });
-
   return (
     <Fragment>
       <Header />
 
       <div className="container mt-5">
         <div className="row">
-          {type.map((beer) => (
+          {context.moz2.map((beer) => (
             <div key={beer.id} className="col-md-4 mt-5">
               <Card
                 border="dark"
@@ -39,7 +36,6 @@ const Cards = ({ type }) => {
                   height: "25rem",
                   cursor: "pointer",
                   backgroundColor: "#313131",
-                  transition: "all 1s linear",
                 }}
               >
                 <Card.Title className="mt-3">{beer.name}</Card.Title>
@@ -54,6 +50,7 @@ const Cards = ({ type }) => {
                   <Button
                     onClick={() =>
                       context.handleNewCard(
+                        // uuidv4(),
                         beer.id,
                         beer.name,
                         beer.image_url,
@@ -76,12 +73,11 @@ const Cards = ({ type }) => {
                   >
                     <FaEye color="#f6d04d" fontSize="20px" />
                   </Button>
-                  {show === true ? (
+                  {show == true ? (
                     <ModalBeer
                       show={show}
                       setShow={(e) => setShow(e)}
                       id={id}
-                      com={type}
                     />
                   ) : (
                     ""
@@ -115,4 +111,4 @@ const Cards = ({ type }) => {
   );
 };
 
-export default Cards;
+export default Drink;

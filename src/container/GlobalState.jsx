@@ -1,60 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import { orderBy } from 'lodash';
-import { ToastContainer } from 'react-toastify';
-import Contexts from '../context/contextApi';
-import { getAllBeerList } from './../services/allBeerList';
-import { getBeerPairPizza } from './../services/beerPairPizza';
-import { getBeerPairSteak } from './../services/beerPairSteak';
+import { orderBy } from "lodash";
+import { ToastContainer } from "react-toastify";
+import Contexts from "../context/contextApi";
+import { getAllBeerList } from "./../services/allBeerList";
+import { getBeerPairPizza } from "./../services/beerPairPizza";
+import { getBeerPairSteak } from "./../services/beerPairSteak";
 import {
   errorMessage,
   infoMessage,
   successMessage,
   warningMessage,
-} from '../utils/message';
+} from "../utils/message";
 
 const Global = (props) => {
   const [Cards, setCards] = useState([]);
   const [Favorite, setFavorite] = useState([]);
   const [AllBeers, setAllBeers] = useState([]);
-  // const [BeerPairPizza, setBeerPairPizza] = useState([]);
-  // const [BeerPairSteak, setBeerPairSteak] = useState([]);
+  const [BeerPairPizza, setBeerPairPizza] = useState([]);
+  const [BeerPairSteak, setBeerPairSteak] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const allbeers = async () => {
+  const allbeer = async () => {
     try {
       const res = await getAllBeerList();
+      const pizza = await getBeerPairPizza();
+      const Steak = await getBeerPairSteak();
+      setBeerPairSteak(Steak.data);
+      setBeerPairPizza(pizza.data);
       setAllBeers(res.data);
     } catch (err) {
-      warningMessage('Check your internet connection');
-      console.error(err);
-    }
-  };
-  const beerpizza = async () => {
-    try {
-      const res = await getBeerPairPizza();
-      setAllBeers(res.data);
-    } catch (err) {
-      warningMessage('Check your internet connection');
-      console.error(err);
-    }
-  };
-  const beersteak = async () => {
-    try {
-      const res = await getBeerPairSteak();
-      setAllBeers(res.data);
-    } catch (err) {
-      warningMessage('Check your internet connection');
+      warningMessage("Check your internet connection");
       console.error(err);
     }
   };
 
   useEffect(() => {
-    // allbeers();
-    // beerpizza():
-    const getItem = window.localStorage.getItem('beer');
-    const getTotal = window.localStorage.getItem('total');
-    const getFavorite = window.localStorage.getItem('favorite');
+    allbeer();
+
+    const getItem = window.localStorage.getItem("beer");
+    const getTotal = window.localStorage.getItem("total");
+    const getFavorite = window.localStorage.getItem("favorite");
     if (getItem) {
       setCards(JSON.parse(getItem));
       setTotal(getTotal);
@@ -77,8 +63,8 @@ const Global = (props) => {
     cards.push(card);
     setCards(cards);
     newTotal(price);
-    window.localStorage.setItem('beer', JSON.stringify(cards));
-    successMessage('Item successfully added to cart');
+    window.localStorage.setItem("beer", JSON.stringify(cards));
+    successMessage("Item successfully added to cart");
   };
 
   const handleFavorite = (ids, names, imgs, tagline, price, brewed) => {
@@ -96,23 +82,23 @@ const Global = (props) => {
       };
       favorites.push(favorite);
       setFavorite(favorites);
-      window.localStorage.setItem('favorite', JSON.stringify(favorites));
-      infoMessage('Item added to favorites');
+      window.localStorage.setItem("favorite", JSON.stringify(favorites));
+      infoMessage("Item added to favorites");
     } else {
       const favorites = [...Favorite];
       const filterfavorite = favorites.filter((p) => p.id !== ids);
       setFavorite(filterfavorite);
-      window.localStorage.setItem('favorite', JSON.stringify(filterfavorite));
-      warningMessage('Item removed from favorites');
+      window.localStorage.setItem("favorite", JSON.stringify(filterfavorite));
+      warningMessage("Item removed from favorites");
 
       let hours = 30 * 24; // Reset when storage is more than 1 Month
       let now = new Date().getTime();
 
       if (
-        window.localStorage.getItem('favorite') === '[]' ||
+        window.localStorage.getItem("favorite") === "[]" ||
         now > hours * 60 * 60 * 1000
       ) {
-        window.localStorage.removeItem('favorite');
+        window.localStorage.removeItem("favorite");
       }
     }
   };
@@ -121,7 +107,7 @@ const Global = (props) => {
     const cards = [...Cards];
     const filterCard = cards.filter((p) => p.id !== id);
     setCards(filterCard);
-    window.localStorage.setItem('beer', JSON.stringify(filterCard));
+    window.localStorage.setItem("beer", JSON.stringify(filterCard));
 
     const modalIndex = AllBeers.find((p) => p.id === id);
     newTotal(modalIndex.srm, false);
@@ -130,44 +116,44 @@ const Global = (props) => {
     let now = new Date().getTime();
 
     if (
-      window.localStorage.getItem('beer') === '[]' ||
+      window.localStorage.getItem("beer") === "[]" ||
       now > hours * 60 * 60 * 1000
     ) {
       localStorage.clear();
-      window.localStorage.removeItem('beer');
-      window.localStorage.removeItem('total');
+      window.localStorage.removeItem("beer");
+      window.localStorage.removeItem("total");
     }
-    errorMessage('Remove Item From Cart');
+    errorMessage("Remove Item From Cart");
   };
 
   const sortBeerNameAsc = () => {
-    setAllBeers(orderBy(AllBeers, 'name', 'asc'));
-    console.log('sort');
+    setAllBeers(orderBy(AllBeers, "name", "asc"));
+    console.log("sort");
   };
   const sortBeerNameDes = () => {
-    setAllBeers(orderBy(AllBeers, 'name', 'desc'));
-    console.log('sort');
+    setAllBeers(orderBy(AllBeers, "name", "desc"));
+    console.log("sort");
   };
 
   const sortBeerAbvAsc = () => {
-    setAllBeers(orderBy(AllBeers, 'abv', 'asc'));
-    console.log('sort');
+    setAllBeers(orderBy(AllBeers, "abv", "asc"));
+    console.log("sort");
   };
 
   const sortBeerAbvDes = () => {
-    setAllBeers(orderBy(AllBeers, 'abv', 'desc'));
-    console.log('sort');
+    setAllBeers(orderBy(AllBeers, "abv", "desc"));
+    console.log("sort");
   };
 
   const newTotal = (price, action = true) => {
     if (action === true) {
       const result = total + price;
       setTotal(result);
-      window.localStorage.setItem('total', result);
+      window.localStorage.setItem("total", result);
     } else {
       const result = total - price;
       setTotal(result);
-      window.localStorage.setItem('total', result);
+      window.localStorage.setItem("total", result);
     }
   };
 
@@ -176,10 +162,9 @@ const Global = (props) => {
       value={{
         cards: Cards,
         favorite: Favorite,
-        allbeers: allbeers,
-        beerpizza:beerpizza,
-        beersteak:beersteak,
         AllBeers: AllBeers,
+        BeerPairPizza: BeerPairPizza,
+        BeerPairSteak: BeerPairSteak,
         total: total,
         sortBeerNameAsc: sortBeerNameAsc,
         sortBeerNameDes: sortBeerNameDes,

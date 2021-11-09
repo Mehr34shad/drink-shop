@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Modal, Image } from "react-bootstrap";
-import contextApi from "../context/contextApi.js";
 
-function ModalBeer({ show, setShow, id }) {
-  const context = useContext(contextApi);
-  const modalIndex = context.beers.find((p) => p.id === id);
+function ModalBeer({ show, setShow, id, com }) {
+  // const context = useContext(contextApi);
+  const modalIndex = com.find((p) => p.id === id);
 
   return (
     <Modal
