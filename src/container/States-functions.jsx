@@ -128,21 +128,17 @@ const Global = (props) => {
 
   const sortBeerNameAsc = () => {
     setAllBeers(orderBy(AllBeers, 'name', 'asc'));
-    console.log('sort');
   };
   const sortBeerNameDes = () => {
     setAllBeers(orderBy(AllBeers, 'name', 'desc'));
-    console.log('sort');
   };
 
   const sortBeerAbvAsc = () => {
     setAllBeers(orderBy(AllBeers, 'abv', 'asc'));
-    console.log('sort');
   };
 
   const sortBeerAbvDes = () => {
     setAllBeers(orderBy(AllBeers, 'abv', 'desc'));
-    console.log('sort');
   };
 
   const newTotal = (price, action = true) => {

@@ -3,13 +3,13 @@ import contexts from '../context/contexts.js';
 
 const Sort = () => {
   const context = useContext(contexts);
-  const {sortBeerAbvAsc,sortBeerAbvDes,sortBeerNameAsc ,sortBeerNameDes} = context;
+  const { sortBeerAbvAsc, sortBeerAbvDes, sortBeerNameAsc, sortBeerNameDes } =
+    context;
+
   return (
     <>
       <div className="container mt-5">
-
-
-      <div className="radio-container text-white m-5">
+         <div className="radio-container text-white m-5">
        <h4 className="text-white d-inline me-4">Filtre :</h4>
         <label htmlFor="low" className="me-2">Abv : Low</label>
         <input type="radio" id="low" name="sort" className="me-4" onClick={sortBeerAbvAsc} />
@@ -22,7 +22,7 @@ const Sort = () => {
 
         <label htmlFor="z-a" className="me-3">Name : Z-A</label>
         <input type="radio" id="z-a" name="sort" className="me-4" onClick={sortBeerNameDes} />
-      </div> 
+      </div>
       </div>
     </>
   );

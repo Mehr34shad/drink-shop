@@ -20,8 +20,6 @@ const Cards = ({ type }) => {
     }
   }
 
-  console.log({ type });
-
   return (
     <Fragment>
       <Header />
